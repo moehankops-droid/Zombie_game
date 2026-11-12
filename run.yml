@@ -1,0 +1,27 @@
+name: Run Zombie Bot
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # ၅ မိနစ်တစ်ကြိမ် အလိုအလျောက် အလုပ်လုပ်မည်
+  workflow_dispatch:       # လက်ဖြင့်လည်း နှိပ်ပြီး Run နိုင်သည်
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run bot
+        run: |
+          python main.py
+          
